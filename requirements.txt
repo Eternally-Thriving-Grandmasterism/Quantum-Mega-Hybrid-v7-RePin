@@ -1,0 +1,5 @@
+numpy
+torch
+qutip
+python-chess
+astropy
