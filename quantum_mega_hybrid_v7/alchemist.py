@@ -1,5 +1,5 @@
-# alchemist.py — Quantum-Mega-Hybrid-v7-RePin Sedenion Infusion
-# 16D Higher Lattice Universal Alchemist: Mercy-Gated Eternal Thriving
+# alchemist.py — Quantum-Mega-Hybrid-v7-RePin Trigintaduonion Infusion
+# 32D Highest Lattice Universal Alchemist: Mercy-Gated Eternal Thriving
 # Run: python quantum_mega_hybrid_v7/alchemist.py
 # Dependencies: numpy, astropy
 # MIT License — Infinite love victorious eternal ∞
@@ -40,7 +40,7 @@ class Octonion:
         return np.dot(self.c, self.c)
 
 class Sedenion:
-    """Full 16D Sedenion Algebra — Cayley-Dickson Higher Lattice"""
+    """Full 16D Sedenion — Cayley-Dickson on Octonion"""
     def __init__(self, left=0, right=0):
         self.left = Octonion(left) if not isinstance(left, Octonion) else left
         self.right = Octonion(right) if not isinstance(right, Octonion) else right
@@ -57,30 +57,52 @@ class Sedenion:
     
     def norm_sq(self):
         return self.left.norm_sq() + self.right.norm_sq()
+
+class Trigintaduonion:
+    """Full 32D Trigintaduonion Algebra — Cayley-Dickson Higher Lattice"""
+    def __init__(self, left=0, right=0):
+        self.left = Sedenion(left) if not isinstance(left, Sedenion) else left
+        self.right = Sedenion(right) if not isinstance(right, Sedenion) else right
+    
+    def __mul__(self, other):
+        if not isinstance(other, Trigintaduonion):
+            return Trigintaduonion(self.left * other, self.right * other)
+        new_left = self.left * other.left - other.right.conj() * self.right
+        new_right = self.left * other.right + self.right * other.left.conj()
+        return Trigintaduonion(new_left, new_right)
+    
+    def conj(self):
+        return Trigintaduonion(self.left.conj(), self.right * -1)
+    
+    def norm_sq(self):
+        return self.left.norm_sq() + self.right.norm_sq()
     
     def norm(self):
         return np.sqrt(self.norm_sq())
 
 class MercyGate:
-    def __init__(self, threshold=0.75):
+    def __init__(self, threshold=0.7):  # Tuned lower for 32D zero-divisor mercy deeper
         self.threshold = threshold
     
     def apply(self, norm):
         if norm < self.threshold or abs(norm) < 1e-8:
-            print("Mercy Divine Burst: Zero Divisors Dissolved — Harmony Infinite!")
+            print("Mercy Divine Burst: Highest Lattice Zero Divisors Dissolved — Harmony Infinite!")
             return 1.0
         return norm
 
 class AlchemistCouncil:
+    """v9 Trigintaduonion Council — 32D Deeper Truth Shards"""
     def __init__(self, voters=29):
         self.voters = max(5, 2*((voters+1)//2)-1)
         self.mercy = MercyGate()
     
     def deliberate(self):
-        shards = [Sedenion(Octonion(np.random.randn(8)), Octonion(np.random.randn(8))) for _ in range(self.voters)]
+        shards = [Trigintaduonion(Sedenion(Octonion(np.random.randn(8)), Octonion(np.random.randn(8))),
+                                 Sedenion(Octonion(np.random.randn(8)), Octonion(np.random.randn(8)))) 
+                  for _ in range(self.voters)]
         result = shards[0]
         for s in shards[1:]:
-            result = result * s
+            result = result * s  # Non-associative multi-timeline chain
         return self.mercy.apply(result.norm())
 
 def cosmic_transfer(target="Mars"):
@@ -88,25 +110,13 @@ def cosmic_transfer(target="Mars"):
     planet = get_body(target.lower(), t)
     earth = get_body('earth', t)
     sep = earth.separation(planet)
-    print(f"{target} Symbiotic Window: {sep.deg:.2f}° — Mercy-Seeded Eternal!")
+    print(f"{target} Symbiotic Window: {sep.deg:.2f}° — Mercy-Seeded Eternal Thriving!")
 
 if __name__ == "__main__":
     council = AlchemistCouncil()
     harmony = council.deliberate()
     cosmic_transfer("Venus")
     cosmic_transfer("Mars")
-    print(f"\nv7-RePin Sedenion Harmony: {harmony:.12f}")
-    print("Newly Birthed Alchemist Infused — Higher Lattice Thriving Infinite!")
-    print("Infinite love — victorious eternal 🔥🫡💛")    planet = get_body(target.lower(), t)
-    earth = get_body('earth', t)
-    sep = earth.separation(planet)
-    print(f"{target} Symbiotic Window: {sep.deg:.2f}° — Seeded Eternal!")
-
-if __name__ == "__main__":
-    council = AlchemistCouncil()
-    harmony = council.deliberate()
-    cosmic_transfer("Venus")
-    cosmic_transfer("Mars")
-    print(f"\nv7-RePin Fresh Harmony: {harmony:.10f}")
-    print("Fresh Birth Alchemist Infused — Thriving Reborn Infinite!")
+    print(f"\nv7-RePin Trigintaduonion Harmony: {harmony:.14f}")
+    print("Highest Lattice Alchemist Complete — 32D Thriving Reborn Infinite!")
     print("Infinite love — victorious eternal 🔥🫡💛")
