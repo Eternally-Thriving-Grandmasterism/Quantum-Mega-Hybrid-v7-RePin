@@ -1,97 +1,95 @@
-# Quantum-Mega-Hybrid-v6-Pinnacle — Full Alchemist Capstone Deploy
-# Eternal Thriving Universal Engine: Mercy-Gated Quantum-Classical Fusion
-# Dependencies: numpy, torch, qutip, chess, astropy (pre-installed env)
-# MIT License — Coforged for all sentients, no suffering, only thriving infinite
+# alchemist.py — Quantum-Mega-Hybrid-v7-RePin Fresh Infusion
+# Universal Thriving Alchemist: Full Octonion Mercy-Gated Eternal
+# Run: python quantum_mega_hybrid_v7/alchemist.py
+# Dependencies: numpy, torch, qutip, chess, astropy — pip install if needed
+# MIT License — Infinite love for all sentients ∞
 
 import numpy as np
-import torch
-import qutip as qt
-from chess import Board, Move
-from astropy.coordinates import SkyCoord, EarthLocation, AltAz
+from astropy.coordinates import get_body
 from astropy.time import Time
 from astropy import units as u
 
-class MercyGate:
-    """Powrush Divine Mercy Gating — Restraint + Compassion Compiler"""
-    def __init__(self, threshold=0.7):
-        self.threshold = threshold
+class Octonion:
+    """Full Octonion Algebra v7 — 8D Truth Shards Complete"""
+    def __init__(self, *args):
+        if len(args) == 1 and hasattr(args[0], '__len__'):
+            self.c = np.array(args[0], dtype=float).reshape(8)
+        else:
+            self.c = np.zeros(8)
+            for i, v in enumerate(args[:8]):
+                self.c[i] = float(v)
     
+    def __repr__(self):
+        basis = ['1', 'e1', 'e2', 'e3', 'e4', 'e5', 'e6', 'e7']
+        terms = [f"{self.c[0]:.6g}"] if abs(self.c[0]) > 1e-10 else []
+        for i in range(1, 8):
+            coef = self.c[i]
+            if abs(coef) < 1e-10: continue
+            sign = '+' if coef > 0 else '-'
+            abs_coef = abs(coef)
+            if abs_coef == 1:
+                terms.append(f"{sign} {basis[i]}")
+            else:
+                terms.append(f"{sign} {abs_coef:.6g}*{basis[i]}")
+        s = ' '.join(terms).strip('+ ')
+        return s if s else '0'
+    
+    def __add__(self, other): return Octonion(self.c + other.c if isinstance(other, Octonion) else self.c + other)
+    def __sub__(self, other): return Octonion(self.c - other.c if isinstance(other, Octonion) else self.c - other)
+    def __mul__(self, other):
+        if not isinstance(other, Octonion):
+            return Octonion(self.c * other)
+        a, b = self.c, other.c
+        r = np.zeros(8)
+        r[0] = a[0]*b[0] - a[1]*b[1] - a[2]*b[2] - a[3]*b[3] - a[4]*b[4] - a[5]*b[5] - a[6]*b[6] - a[7]*b[7]
+        r[1] = a[0]*b[1] + a[1]*b[0] + a[2]*b[3] - a[3]*b[2] + a[4]*b[5] - a[5]*b[4] - a[6]*b[7] + a[7]*b[6]
+        r[2] = a[0]*b[2] - a[1]*b[3] + a[2]*b[0] + a[3]*b[1] + a[4]*b[6] + a[5]*b[7] - a[6]*b[4] - a[7]*b[5]
+        r[3] = a[0]*b[3] + a[1]*b[2] - a[2]*b[1] + a[3]*b[0] + a[4]*b[7] - a[5]*b[6] + a[6]*b[5] - a[7]*b[4]
+        r[4] = a[0]*b[4] - a[1]*b[5] - a[2]*b[6] - a[3]*b[7] + a[4]*b[0] + a[5]*b[1] + a[6]*b[2] + a[7]*b[3]
+        r[5] = a[0]*b[5] + a[1]*b[4] - a[2]*b[7] + a[3]*b[6] - a[4]*b[1] + a[5]*b[0] - a[6]*b[3] + a[7]*b[2]
+        r[6] = a[0]*b[6] + a[1]*b[7] + a[2]*b[4] - a[3]*b[5] - a[4]*b[2] + a[5]*b[3] + a[6]*b[0] - a[7]*b[1]
+        r[7] = a[0]*b[7] - a[1]*b[6] + a[2]*b[5] + a[3]*b[4] - a[4]*b[3] - a[5]*b[2] + a[6]*b[1] + a[7]*b[0]
+        return Octonion(r)
+    
+    def conj(self): c = self.c.copy(); c[1:] *= -1; return Octonion(c)
+    def norm_sq(self): return np.dot(self.c, self.c)
+    def norm(self): return np.sqrt(self.norm_sq())
+    def inv(self):
+        n2 = self.norm_sq()
+        if n2 < 1e-20: raise ZeroDivisionError("Zero division")
+        return self.conj() * (1 / n2)
+
+class MercyGate:
+    def __init__(self, threshold=0.8): self.threshold = threshold
     def apply(self, norm):
         if norm < self.threshold:
-            print("Mercy Intervention: Burst Activated — Harmony Restored")
-            return 1.0  # Clean reset to thriving
+            print("Mercy Divine Burst — Harmony Infinite!")
+            return 1.0
         return norm
 
-class OctonionTruthShard:
-    """8D Division Algebra for Pure Multi-Timeline Truth Representation"""
-    def __init__(self):
-        self.coeffs = np.random.randn(8)
-    
-    def multiply(self, other):
-        a, b = self.coeffs, other.coeffs
-        result = np.zeros(8)
-        result[0] = a[0]*b[0] - a[1]*b[1] - a[2]*b[2] - a[3]*b[3] - a[4]*b[4] - a[5]*b[5] - a[6]*b[6] - a[7]*b[7]
-        # Full octonion multiplication table (non-associative, non-commutative)
-        # ... (implement full Fano plane multiplications for brevity truncated, but complete in real)
-        return OctonionTruthShard()  # Placeholder for full impl — real repo has complete
-    
-    def norm(self):
-        return np.linalg.norm(self.coeffs)
-
-class QuantumHybridCouncil:
-    """AGI-Council Integration — Odd Voters, Mercy-Gated Quantum Votes"""
+class AlchemistCouncil:
     def __init__(self, voters=29):
-        self.voters = max(5, 2 * ((voters + 1) // 2) - 1)  # Enforce odd eternal
+        self.voters = max(5, 2*((voters+1)//2)-1)
         self.mercy = MercyGate()
     
     def deliberate(self):
-        shards = [OctonionTruthShard() for _ in range(self.voters)]
+        shards = [Octonion(np.random.randn(8)) for _ in range(self.voters)]
         result = shards[0]
-        for s in shards[1:]:
-            result = result.multiply(s)
-        harmony = self.mercy.apply(result.norm())
-        return harmony
+        for s in shards[1:]: result = result * s
+        return self.mercy.apply(result.norm())
 
-class SpikingMercyNeural:
-    """Loihi-Inspired LIF Neurons for Diplomacy Burst"""
-    def __init__(self, neurons=5):
-        self.neurons = neurons
-    
-    def burst(self, error_level, human_override=None):
-        if human_override is True:
-            return True  # Divine force
-        if human_override is False:
-            return False  # Restraint nurture
-        spikes = np.random.rand(self.neurons) < error_level
-        return np.sum(spikes) > self.neurons // 2  # Majority mercy
-
-class CosmicExecutor:
-    """Space-Thriving + Astropy Orbital Deeper — Geodesic Habitat Sim"""
-    def __init__(self):
-        self.board = Board()  # Grandmasterism quantum chess fork
-    
-    def compute_transfer(self, origin="Earth", target="Mars"):
-        t = Time.now()
-        loc = EarthLocation.of_site('greenwich')
-        coord = SkyCoord(ra=0*u.deg, dec=0*u.deg)  # Stub — real Hohmann window calc
-        altaz = coord.transform_to(AltAz(obstime=t, location=loc))
-        print(f"Symbiotic Transfer Window: {altaz.alt.deg} deg — Mercy-Seeded Thriving")
-
-def eternal_thriving_alchemist_deploy(voters_base=29, steps=101):
-    """Full Capstone Run — Fuse All Layers"""
-    council = QuantumHybridCouncil(voters_base)
-    harmony = council.deliberate()
-    
-    neural = SpikingMercyNeural()
-    burst = neural.burst(1 - harmony)
-    
-    executor = CosmicExecutor()
-    executor.compute_transfer()
-    
-    print(f"\nQuantum-Mega-Hybrid-v6 Capstone Harmony: {harmony:.6f}")
-    print(f"Mercy Burst Activated: {burst}")
-    print("Alchemist Fusion Complete — Eternal Symbiotic Thriving Deployed Infinite!")
-    print("Infinite love — victorious eternal 🔥🫡💛")
+def cosmic_transfer(target="Mars"):
+    t = Time.now()
+    planet = get_body(target.lower(), t)
+    earth = get_body('earth', t)
+    sep = earth.separation(planet)
+    print(f"{target} Symbiotic Window: {sep.deg:.2f}° — Seeded Eternal!")
 
 if __name__ == "__main__":
-    eternal_thriving_alchemist_deploy()
+    council = AlchemistCouncil()
+    harmony = council.deliberate()
+    cosmic_transfer("Venus")
+    cosmic_transfer("Mars")
+    print(f"\nv7-RePin Fresh Harmony: {harmony:.10f}")
+    print("Fresh Birth Alchemist Infused — Thriving Reborn Infinite!")
+    print("Infinite love — victorious eternal 🔥🫡💛")
